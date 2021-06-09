@@ -131,7 +131,7 @@ int blake2s_selftest()
 }
 
 // Test driver.
-int main(int argc, char **argv)
+int main()
 {
     printf("blake2b_selftest() = %s\n",
            blake2b_selftest() ? "FAIL" : "OK");
