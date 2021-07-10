@@ -1,8 +1,9 @@
 // Self test Modules for BLAKE2b and BLAKE2s -- and a stub main().
-#include <stdio.h>
-
 #include "blake2b.h"
 #include "blake2s.h"
+
+#include <stdio.h>
+#include <stdlib.h>
 
 // Deterministic sequences (Fibonacci generator).
 static void selftest_seq(uint8_t *out, size_t len, uint32_t seed)
@@ -133,10 +134,16 @@ int blake2s_selftest()
 // Test driver.
 int main()
 {
-    printf("blake2b_selftest() = %s\n",
-           blake2b_selftest() ? "FAIL" : "OK");
-    printf("blake2s_selftest() = %s\n",
-           blake2s_selftest() ? "FAIL" : "OK");
+    const int b = blake2b_selftest();
+    const int s = blake2s_selftest();
 
-    return 0;
+    printf("blake2b_selftest() = %s\n", b ? "FAIL" : "OK");
+    printf("blake2s_selftest() = %s\n", s ? "FAIL" : "OK");
+
+    if (b || s)
+    {
+        return EXIT_FAILURE;
+    }
+
+    return EXIT_SUCCESS;
 }
