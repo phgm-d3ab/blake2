@@ -14,3 +14,4 @@ target_include_directories(blake2b PUBLIC ${PROJECT_SOURCE_DIR})
 
 add_executable(selftest selftest.c)
 target_link_libraries(selftest blake2s blake2b)
+add_test(NAME blake2_test COMMAND selftest)
